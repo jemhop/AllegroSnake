@@ -14,45 +14,8 @@
 
 Snake snake = Snake();
 
-//0 = up, 1 = right, 2 = down, 3 = left
-// think NESW
-
-void checkInit(bool test, const char* description)
-{
-    if (test) return;
-
-    printf("Couldn't initialize %s\n", description);
-    exit(1);
-}
-
 int main()
 {
-    //legacy code, pre game class
-    
-    /*checkInit(al_init(), "allegro");
-    checkInit(al_install_keyboard(), "keyboard");
-    checkInit(al_init_primitives_addon(), "primitives");
-
-    ALLEGRO_TIMER* timer = al_create_timer(1.0 / FRAME_RATE);
-    checkInit(timer, "timer");
-
-    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
-    checkInit(queue, "queue");
-
-    al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
-    al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
-    al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
-
-    ALLEGRO_DISPLAY* disp = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
-    checkInit(disp, "display");
-
-    ALLEGRO_FONT* font = al_create_builtin_font();
-    checkInit(font, "font");
-
-    al_register_event_source(queue, al_get_keyboard_event_source());
-    al_register_event_source(queue, al_get_display_event_source(disp));
-    al_register_event_source(queue, al_get_timer_event_source(timer));*/
-
     Game game = Game();
     game.initAll();
 
@@ -115,7 +78,7 @@ int main()
         if (redraw && al_is_event_queue_empty(game.queue))
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
-            //al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
+            al_draw_textf(game.font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", snake.x, y);
 
             snake.render();
 
