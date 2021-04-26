@@ -13,3 +13,7 @@ const int gridSize = 20;
 const int FRAME_RATE = 60;
 
 const double snakeSpeed = 1;
+
+const int SNAKE = 1;
+const int APPLE = 2;
+const int EMPTY = 0;

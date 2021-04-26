@@ -11,6 +11,7 @@
 #include "Snake.h"
 #include "Globals.h"
 #include "Game.h"
+#include "Grid.h"
 
 Snake snake = Snake();
 
@@ -18,6 +19,9 @@ int main()
 {
     Game game = Game();
     game.initAll();
+
+    Grid grid = Grid(gridSize);
+
 
     bool done = false;
     bool redraw = true;
@@ -32,9 +36,17 @@ int main()
     al_start_timer(game.timer);
 
     snake.addPiece(SnakePiece(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, gridSize, gridSize, al_map_rgba(255, 50, 100, 255)));
+    grid.setGridPos((SCREEN_WIDTH / 2)/gridSize, (SCREEN_HEIGHT / 2)/gridSize, SNAKE);
+
+    double oldTime = al_get_time();
+    
+    double movementX = 0;
+    double movementY = 0;
 
     while (1)
     {
+        double newTime = al_get_time();
+        double dt = newTime - oldTime;
         al_wait_for_event(game.queue, &event);
 
         switch (event.type)
@@ -77,21 +89,18 @@ int main()
 
         if (redraw && al_is_event_queue_empty(game.queue))
         {
-            al_clear_to_color(al_map_rgb(0, 0, 0));
-            al_draw_textf(game.font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", snake.x, y);
-
+            al_clear_to_color(al_map_rgba(0,0,0,0));
+            
             snake.render();
+            grid.render();
 
-            for (int x = 0; x < SCREEN_WIDTH; x += gridSize)
-                al_draw_line(x, 0, x, SCREEN_HEIGHT, al_map_rgba(50,50,50,50), 1);
-
-            for (int y = 0; y < SCREEN_HEIGHT; y += gridSize)
-                al_draw_line(0, y, SCREEN_WIDTH, y, al_map_rgba(50,50,50,50), 1);
 
             al_flip_display();
 
             redraw = false;
         }
+
+        oldTime = newTime;
 
     }
     

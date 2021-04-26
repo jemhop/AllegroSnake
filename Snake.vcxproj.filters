@@ -47,5 +47,8 @@
     <ClInclude Include="src\Snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

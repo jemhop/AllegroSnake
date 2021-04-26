@@ -31,13 +31,14 @@ void Snake::moveSnake(int gridSize)
 	snakeParts.pop_back();
 	//change its direction
 	temp.direction = snakeParts[0].direction;
-	if (snakeParts[0].direction == UP)
+
+	if (temp.direction == UP)
 		temp.y = snakeParts[0].y - gridSize;
-	if (snakeParts[0].direction == DOWN)
+	if (temp.direction == DOWN)
 		temp.y = snakeParts[0].y + gridSize;
-	if (snakeParts[0].direction == LEFT)
+	if (temp.direction == LEFT)
 		temp.x = snakeParts[0].x - gridSize;
-	if (snakeParts[0].direction == RIGHT)
+	if (temp.direction == RIGHT)
 		temp.x = snakeParts[0].x + gridSize;
 
 	//add to the front
